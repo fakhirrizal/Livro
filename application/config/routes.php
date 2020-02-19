@@ -152,17 +152,27 @@ $route['spv_side/cleaning_log'] = 'spv/App/cleaning_log';
 $route['spv_side/tentang_aplikasi'] = 'spv/App/about';
 $route['spv_side/bantuan'] = 'spv/App/helper';
 
-$route['spv/barang'] = 'spv/Master/barang_data';
-$route['spv/tambah_data_barang'] = 'spv/Master/add_barang_data';
-$route['spv/simpan_data_barang'] = 'spv/Master/save_barang_data';
-$route['spv/detil_data_barang/(:any)'] = 'spv/Master/detail_barang_data/$1';
-$route['spv/ubah_data_barang/(:any)'] = 'spv/Master/edit_barang_data/$1';
-$route['spv/perbarui_data_barang'] = 'spv/Master/update_barang_data';
-$route['spv/simpan_data_anggota_barang'] = 'spv/Master/save_barang_member';
-$route['spv/perbarui_data_anggota_barang'] = 'spv/Master/update_barang_member';
-$route['spv/atur_ulang_kata_sandi_anggota_barang/(:any)'] = 'spv/Master/reset_password_barang_member_account/$1';
-$route['spv/hapus_data_barang/(:any)'] = 'spv/Master/delete_barang_data/$1';
-$route['spv/hapus_data_anggota_barang/(:any)'] = 'spv/Master/delete_barang_member/$1';
+$route['spv_side/karyawan'] = 'spv/Master/karyawan_data';
+$route['spv_side/tambah_data_karyawan'] = 'spv/Master/add_karyawan_data';
+$route['spv_side/simpan_data_karyawan'] = 'spv/Master/save_karyawan_data';
+$route['spv_side/detail_data_karyawan/(:any)'] = 'spv/Master/detail_karyawan_data/$1';
+$route['spv_side/ubah_data_karyawan/(:any)'] = 'spv/Master/edit_karyawan_data/$1';
+$route['spv_side/perbarui_data_karyawan'] = 'spv/Master/update_karyawan_data';
+$route['spv_side/atur_ulang_kata_sandi_karyawan/(:any)'] = 'spv/Master/reset_password_karyawan_account/$1';
+$route['spv_side/non_aktifkan_akun_karyawan/(:any)'] = 'spv/Master/non_aktifkan_akun_karyawan/$1';
+$route['spv_side/hapus_data_karyawan/(:any)'] = 'spv/Master/delete_karyawan_data/$1';
+
+$route['spv_side/barang'] = 'spv/Master/barang_data';
+$route['spv_side/tambah_data_barang'] = 'spv/Master/add_barang_data';
+$route['spv_side/simpan_data_barang'] = 'spv/Master/save_barang_data';
+$route['spv_side/detil_data_barang/(:any)'] = 'spv/Master/detail_barang_data/$1';
+$route['spv_side/ubah_data_barang/(:any)'] = 'spv/Master/edit_barang_data/$1';
+$route['spv_side/perbarui_data_barang'] = 'spv/Master/update_barang_data';
+$route['spv_side/simpan_data_anggota_barang'] = 'spv/Master/save_barang_member';
+$route['spv_side/perbarui_data_anggota_barang'] = 'spv/Master/update_barang_member';
+$route['spv_side/atur_ulang_kata_sandi_anggota_barang/(:any)'] = 'spv/Master/reset_password_barang_member_account/$1';
+$route['spv_side/hapus_data_barang/(:any)'] = 'spv/Master/delete_barang_data/$1';
+$route['spv_side/hapus_data_anggota_barang/(:any)'] = 'spv/Master/delete_barang_member/$1';
 
 $route['spv_side/laporan_infus'] = 'spv/Report/laporan_infus';
 $route['spv_side/tambah_laporan_infus'] = 'spv/Report/tambah_laporan_infus';
@@ -177,6 +187,7 @@ $route['spv_side/ubah_data_stok_infus/(:any)'] = 'spv/Report/ubah_data_stok_infu
 $route['spv_side/daftar_barang_stok_infus/(:any)'] = 'spv/Report/daftar_barang_stok_infus/$1';
 $route['spv_side/perbarui_data_stok_infus'] = 'spv/Report/perbarui_data_stok_infus';
 $route['spv_side/perbarui_status_data_stok_infus'] = 'spv/Report/perbarui_status_data_stok_infus';
+$route['spv_side/download_rekap_infus_barang'] = 'spv/Report/download_rekap_infus_barang';
 $route['spv_side/hapus_data_stok_infus_barang/(:any)'] = 'spv/Report/hapus_data_stok_infus_barang/$1';
 $route['spv_side/hapus_data_stok_infus/(:any)'] = 'spv/Report/hapus_data_stok_infus/$1';
 
@@ -203,18 +214,6 @@ $route['member_side/cleaning_log'] = 'member/App/cleaning_log';
 $route['member_side/tentang_aplikasi'] = 'member/App/about';
 $route['member_side/bantuan'] = 'member/App/helper';
 
-$route['spv/barang'] = 'spv/Master/barang_data';
-$route['spv/tambah_data_barang'] = 'spv/Master/add_barang_data';
-$route['spv/simpan_data_barang'] = 'spv/Master/save_barang_data';
-$route['spv/detil_data_barang/(:any)'] = 'spv/Master/detail_barang_data/$1';
-$route['spv/ubah_data_barang/(:any)'] = 'spv/Master/edit_barang_data/$1';
-$route['spv/perbarui_data_barang'] = 'spv/Master/update_barang_data';
-$route['spv/simpan_data_anggota_barang'] = 'spv/Master/save_barang_member';
-$route['spv/perbarui_data_anggota_barang'] = 'spv/Master/update_barang_member';
-$route['spv/atur_ulang_kata_sandi_anggota_barang/(:any)'] = 'spv/Master/reset_password_barang_member_account/$1';
-$route['spv/hapus_data_barang/(:any)'] = 'spv/Master/delete_barang_data/$1';
-$route['spv/hapus_data_anggota_barang/(:any)'] = 'spv/Master/delete_barang_member/$1';
-
 $route['member_side/laporan_infus'] = 'member/Report/laporan_infus';
 $route['member_side/tambah_laporan_infus'] = 'member/Report/tambah_laporan_infus';
 $route['member_side/tambah_laporan_infus_1'] = 'member/Report/tambah_laporan_infus_1';
@@ -230,8 +229,8 @@ $route['member_side/hapus_data_stok_infus_barang/(:any)'] = 'member/Report/hapus
 $route['member_side/hapus_data_stok_infus/(:any)'] = 'member/Report/hapus_data_stok_infus/$1';
 
 $route['member_side/laporan_opname'] = 'member/Report/laporan_opname';
-$route['member_side/tambah_laporan_opname'] = 'member/Report/tambah_laporan_opname';
-$route['member_side/tambah_laporan_opname_1'] = 'member/Report/tambah_laporan_opname_1';
+$route['member_side/tambah_laporan_opname'] = 'member/Report/tambah_laporan_opname_1';
+// $route['member_side/tambah_laporan_opname_1'] = 'member/Report/tambah_laporan_opname_1';
 $route['member_side/tambah_barang_opname'] = 'member/Report/tambah_barang_opname';
 $route['member_side/hapus_barang_opname/(:any)'] = 'member/Report/hapus_barang_opname/$1';
 $route['member_side/tambah_laporan_opname_2'] = 'member/Report/tambah_laporan_opname_2';
@@ -260,14 +259,6 @@ $route['api/desa'] = 'api/master/Desa';
 $route['api/barang'] = 'api/barang/Master';
 $route['api/anggota_barang'] = 'api/barang/Member';
 $route['api/laporan_barang'] = 'api/barang/Report';
-
-$route['api/rutilahu'] = 'api/rutilahu/Master';
-$route['api/anggota_rutilahu'] = 'api/rutilahu/Member';
-$route['api/laporan_rutilahu'] = 'api/rutilahu/Report';
-
-$route['api/sarling'] = 'api/sarling/Master';
-$route['api/anggota_sarling'] = 'api/sarling/Member';
-$route['api/laporan_sarling'] = 'api/sarling/Report';
 
 $route['api/hapus_laporan'] = 'api/Other/delete_report';
 

@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					<div class="form-body">
-						<form role="form" class="form-horizontal" action="<?=base_url('spv_side/tambah_barang_opname');?>" method="post"  enctype='multipart/form-data'>
+						<form role="form" class="form-horizontal" action="<?=base_url('spv_side/tambah_barang_opname');?>" method="post" enctype='multipart/form-data'>
 							<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 							<div class="form-group form-md-line-input has-danger">
 								<label class="col-md-2 control-label" for="form_control_1">Barang <span class="required"> * </span></label>

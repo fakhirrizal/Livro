@@ -39,24 +39,25 @@
 									echo'';
 								}else{
 									$explode_tgl = explode(' ',$row->approval);
-									$approval = '&nbsp;&nbsp;'.$this->Main_model->convert_tanggal($explode_tgl[0]).' '.substr($explode_tgl[1],0,5);
+									$get_verificator = $this->Main_model->getSelectedData('user_profile a', 'a.*', array('a.user_id'=>$row->verificator))->row();
+									$approval = '&nbsp;&nbsp;'.$this->Main_model->convert_tanggal($explode_tgl[0]).' '.substr($explode_tgl[1],0,5).'&nbsp;&nbsp;oleh '.$get_verificator->fullname;
 								}
 						?>
-								<div class="col-md-6">
+								<div class="col-md-10">
 									<table class="table">
 										<tbody>
                                             <tr>
-												<td> Pelapor </td>
+												<td> Requester </td>
 												<td> : </td>
 												<td><?php echo $row->fullname; ?></td>
 											</tr>
                                             <tr>
-												<td> Tanggal Lapor </td>
+												<td> Tanggal Permintaan </td>
 												<td> : </td>
 												<td><?php $pecah_tanggal = explode(' ',$row->created_at); echo $this->Main_model->convert_tanggal($pecah_tanggal[0]).' '.substr($pecah_tanggal[1],0,5); ?></td>
 											</tr>
 											<tr>
-												<td> Status Laporan </td>
+												<td> Status </td>
 												<td> : </td>
 												<td><?php
 												if($row->status=='1'){
@@ -64,7 +65,10 @@
 												}elseif($row->status=='9'){
 													$isi = '<span class="label label-danger"> Rejected </span>'.$approval;
 												}else{
-													$isi = '<span class="label label-warning"> Pending </span>';
+													$isi = '<span class="label label-warning"> Pending </span>&nbsp;&nbsp;
+													<a title="Ubah Status" data-toggle="modal" data-target="#ubahdata" id="'.md5($row->id_stok_opname).'" class="ubahdata">
+													<i class="icon-note"></i>
+													</a>';
 												}
 												echo $isi;
 												?></td>
@@ -129,7 +133,7 @@
 											<!-- <th style="text-align: center;"> Harga Satuan </th> -->
 											<!-- <th style="text-align: center;"> Total Harga </th> -->
 											<th style="text-align: center;"> Keterangan </th>
-											<th style="text-align: center;" width="7%"> Aksi </th>
+											<!-- <th style="text-align: center;" width="7%"> Aksi </th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -151,9 +155,6 @@
 												<td style="text-align: center;">'.$value->nama_barang.'</td>
 												<td style="text-align: center;">'.number_format($value->qty,0).'</td>
 												<td style="text-align: center;">'.$value->keterangan.'</td>
-												<td>
-													'.$btn_del.'
-												</td>
 											</tr>
 											';
 										}

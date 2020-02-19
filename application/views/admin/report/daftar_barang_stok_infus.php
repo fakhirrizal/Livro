@@ -97,7 +97,7 @@
 									</div>
 								</div> -->
 								<div class="form-body">
-                                    <form role="form" class="form-horizontal" action="<?=base_url('admin_side/simpan_laporan_stok_infus_barang');?>" method="post"  enctype='multipart/form-data'>
+                                    <form role="form" class="form-horizontal" action="<?=base_url('admin_side/simpan_laporan_stok_infus_barang');?>" method="post" enctype='multipart/form-data'>
                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
                                         <div class="form-group form-md-line-input has-danger">
                                             <div class="col-md-3" style='text-align:center'>

@@ -16,7 +16,7 @@
 <div class="page-content-inner">
 	<div class="m-heading-1 border-yellow m-bordered" style="background-color:#FAD405;">
 		<h3>Catatan</h3>
-		<p> 1. Jika menghapus data laporan stok opname maka stok di master barang akan bertambah.</p>
+		<p> 1. Jika permintaan telah dimoderasi maka data tidak akan bisa dihapus oleh Anda.</p>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
@@ -33,7 +33,7 @@
 									</button>
 								</div>
 									<span class="separator">|</span>
-									<a href="<?=base_url('member_side/tambah_laporan_opname_1');?>" class="btn green uppercase">Tambah Data <i class="fa fa-plus"></i> </a>
+									<a href="<?=base_url('member_side/tambah_laporan_opname');?>" class="btn green uppercase">Tambah Data <i class="fa fa-plus"></i> </a>
 							</div>
 						</div>
 					</div>

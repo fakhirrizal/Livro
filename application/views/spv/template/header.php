@@ -18,30 +18,30 @@ else{
 		<meta content="LIVRO Coffee" name="author" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/simple-line-icons/simple-line-icons.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/simple-line-icons/simple-line-icons.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css');?>" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
-		<link href="<?=base_url('assets/global/plugins/datatables/datatables.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/select2/css/select2.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/select2/css/select2-bootstrap.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/cubeportfolio/css/cubeportfolio.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/ladda/ladda-themeless.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/global/css/components-md.min.css');?>" rel="stylesheet" id="style_components" type="text/css" />
-		<link href="<?=base_url('assets/global/css/plugins-md.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/pages/css/blog.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/datatables/datatables.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/select2/css/select2.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/select2/css/select2-bootstrap.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/cubeportfolio/css/cubeportfolio.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/ladda/ladda-themeless.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/css/components-md.min.css');?>" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/global/css/plugins-md.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/pages/css/blog.min.css');?>" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
-		<link href="<?=base_url('assets/layouts/layout3/css/layout.min.css');?>" rel="stylesheet" type="text/css" />
-		<link href="<?=base_url('assets/layouts/layout3/css/themes/default.min.css');?>" rel="stylesheet" type="text/css" id="style_color" />
-		<link href="<?=base_url('assets/layouts/layout3/css/custom.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/layouts/layout3/css/layout.min.css');?>" rel="stylesheet" type="text/css" />
+		<link href="<?=base_url('assets_dashboard/layouts/layout3/css/themes/default.min.css');?>" rel="stylesheet" type="text/css" id="style_color" />
+		<link href="<?=base_url('assets_dashboard/layouts/layout3/css/custom.min.css');?>" rel="stylesheet" type="text/css" />
 		<!-- END THEME LAYOUT STYLES -->
-		<link href="<?= site_url(); ?>assets/icon.png" rel="icon" type="image/x-icon">
+		<link href="<?= site_url(); ?>assets_dashboard/icon.png" rel="icon" type="image/x-icon">
 	</head>
     <!-- END HEAD -->
 
@@ -53,7 +53,7 @@ else{
 				<div class="container">
 					<!-- BEGIN LOGO -->
 					<div id="logo" class="pull-left">
-						<h4><img src="<?=base_url('assets/pages/img/logo.png');?>" width='30%'></h4>
+						<h4><img src="<?=base_url('assets_dashboard/pages/img/logo.png');?>" width='30%'></h4>
 					</div>
 					<!-- END LOGO -->
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -68,10 +68,10 @@ else{
 									// $data_notif = $this->Main_model->manualQuery($q);
 									$data_notif = 0;
 								?>
-								<a href="#" class="dropdown-toggle" title="Notifikasi">
+								<!-- <a href="#" class="dropdown-toggle" title="Notifikasi">
 									<i class="icon-bell"></i>
 									<span class="badge badge-default"><?= count($data_notif); ?></span>
-								</a>
+								</a> -->
 								<ul class="dropdown-menu">
 									<li class="external">
 										<h3>Ada
@@ -106,9 +106,9 @@ else{
 									</li>
 								</ul>
 							</li>
-							<li class="droddown dropdown-separator">
+							<!-- <li class="droddown dropdown-separator">
 								<span class="separator"></span>
-							</li>
+							</li> -->
 							<!-- BEGIN USER LOGIN DROPDOWN -->
 							<li class="dropdown dropdown-user dropdown-dark">
 								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -166,6 +166,23 @@ else{
 							<li class="menu-dropdown classic-menu-dropdown <?php if($parent=='home'){echo 'active';}else{echo '';} ?>">
 								<a href="<?php echo site_url('spv_side/beranda'); ?>"><i class="icon-home"></i> Beranda
 								</a>
+							</li>
+							<li class="menu-dropdown classic-menu-dropdown <?php if($parent=='master'){echo 'active';}else{echo '';} ?>">
+								<a href="javascript:;"><i class="icon-drawer"></i> Master
+									<span class="arrow <?php if($parent=='master'){echo 'open';}else{echo '';} ?>"></span>
+								</a>
+								<ul class="dropdown-menu pull-left">
+									<li class=" <?php if($child=='karyawan'){echo 'active';}else{echo '';} ?>">
+										<a href="<?php echo site_url('spv_side/karyawan'); ?>" class="nav-link nav-toggle ">
+											<i class="icon-user-following"></i> Data Karyawan
+										</a>
+									</li>
+									<li class=" <?php if($child=='barang'){echo 'active';}else{echo '';} ?>">
+										<a href="<?php echo site_url('spv_side/barang'); ?>" class="nav-link nav-toggle ">
+											<i class="icon-layers"></i> Data Barang
+										</a>
+									</li>
+								</ul>
 							</li>
 							<li class="menu-dropdown classic-menu-dropdown <?php if($parent=='report'){echo 'active';}else{echo '';} ?>">
 								<a href="javascript:;"><i class="icon-notebook"></i> Laporan

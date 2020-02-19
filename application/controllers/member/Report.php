@@ -50,7 +50,7 @@ class Report extends CI_Controller {
             if($value->status=='1'){
                 $isi['status'] = '<span class="label label-success"> Approved </span>&nbsp;&nbsp;'.$approval.'&nbsp;&nbsp;oleh '.$value->fullname;
 			}elseif($value->status=='9'){
-                $isi['status'] = '<span class="label label-danger"> Rejected </span>&nbsp;&nbsp;'.'&nbsp;&nbsp;oleh '.$approval.$value->fullname;
+                $isi['status'] = '<span class="label label-danger"> Rejected </span>&nbsp;&nbsp;'.$approval.'&nbsp;&nbsp;oleh '.$value->fullname;
                 $href_hapus_data = 'onclick="'.$return_on_click.'" href="'.site_url('member_side/hapus_data_stok_infus/'.md5($value->id_stok_infus)).'"';
             }else{
                 $isi['status'] = '<span class="label label-warning"> Pending </span>';
@@ -381,7 +381,9 @@ class Report extends CI_Controller {
             $isi['tanggal_laporan'] = $this->Main_model->convert_tanggal($pisah_tanggal[0]);
             $isi['pelapor'] = $value->fullname;
             $isi['jumlah_barang'] = number_format($value->total_barang,0).' ('.number_format($value->total_item,0).' item)';
+            $return_on_click = "return confirm('Anda yakin?')";
             $href_ubah_data = 'href="#"';
+            $href_hapus_data = 'href="#"';
             if($value->status=='1'){
 				$isi['status'] = '<span class="label label-success"> Approved </span>';
 			}elseif($value->status=='9'){
@@ -389,8 +391,8 @@ class Report extends CI_Controller {
             }else{
                 $isi['status'] = '<span class="label label-warning"> Pending </span>';
                 $href_ubah_data = 'href="'.site_url('member_side/ubah_data_stok_opname/'.md5($value->id_stok_opname)).'"';
+                $href_hapus_data = 'onclick="'.$return_on_click.'" href="'.site_url('member_side/hapus_data_stok_opname/'.md5($value->id_stok_opname)).'"';
             }
-            $return_on_click = "return confirm('Anda yakin?')";
             $isi['action'] =	'
                                 <div class="btn-group" style="text-align: center;">
                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Aksi
@@ -402,11 +404,7 @@ class Report extends CI_Controller {
                                                 <i class="icon-eye"></i> Detil Data </a>
                                         </li>
                                         <li>
-                                            <a '.$href_ubah_data.'>
-                                                <i class="icon-wrench"></i> Ubah Data </a>
-                                        </li>
-                                        <li>
-                                            <a onclick="'.$return_on_click.'" href="'.site_url('member_side/hapus_data_stok_opname/'.md5($value->id_stok_opname)).'">
+                                            <a '.$href_hapus_data.'>
                                                 <i class="icon-trash"></i> Hapus Data </a>
                                         </li>
                                     </ul>
@@ -433,17 +431,22 @@ class Report extends CI_Controller {
     }
     public function tambah_laporan_opname_2()
     {
-        $data['parent'] = 'report';
-        $data['child'] = 'opname';
-        $data['grand_child'] = '';
-        $data['karyawan'] = $this->Main_model->getSelectedData('karyawan a', 'a.*,b.fullname', '', '', '', '', '', array(
-            'table' => 'user_profile b',
-            'on' => 'a.user_id=b.user_id',
-            'pos' => 'LEFT'
-        ))->result();
-        $this->load->view('member/template/header',$data);
-        $this->load->view('member/report/tambah_laporan_opname_2',$data);
-        $this->load->view('member/template/footer');
+        if($this->cart->contents()==NULL){
+            $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>data barang masih kosong.<br /></div>' );
+            echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+        }else{
+            $data['parent'] = 'report';
+            $data['child'] = 'opname';
+            $data['grand_child'] = '';
+            $data['karyawan'] = $this->Main_model->getSelectedData('karyawan a', 'a.*,b.fullname', '', '', '', '', '', array(
+                'table' => 'user_profile b',
+                'on' => 'a.user_id=b.user_id',
+                'pos' => 'LEFT'
+            ))->result();
+            $this->load->view('member/template/header',$data);
+            $this->load->view('member/report/tambah_laporan_opname_2',$data);
+            $this->load->view('member/template/footer');
+        }
     }
     public function tambah_barang_opname()
     {
@@ -453,7 +456,7 @@ class Report extends CI_Controller {
         if($datacart==NULL){
             if($product['stok']<$this->input->post('qty')){
                 $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>stok tidak memenuhi.<br /></div>' );
-                echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
             }else{
                 $data = array(
                     'id' => $this->input->post('id_barang'),
@@ -466,11 +469,11 @@ class Report extends CI_Controller {
                 $this->db->trans_complete();
                 if($this->db->trans_status() === false){
                     $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>data gagal ditambahkan.<br /></div>' );
-                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
                 }
                 else{
                     $this->session->set_flashdata('sukses','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Yeah! </strong>data telah berhasil ditambahkan.<br /></div>' );
-                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
                 }
             }
         }else{
@@ -486,7 +489,7 @@ class Report extends CI_Controller {
             }
             if($product['stok']<$hasil_pencarian){
                 $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>stok tidak memenuhi.<br /></div>' );
-                echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
             }else{
                 $data = array(
                     'id' => $this->input->post('id_barang'),
@@ -499,11 +502,11 @@ class Report extends CI_Controller {
                 $this->db->trans_complete();
                 if($this->db->trans_status() === false){
                     $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>data gagal ditambahkan.<br /></div>' );
-                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
                 }
                 else{
                     $this->session->set_flashdata('sukses','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Yeah! </strong>data telah berhasil ditambahkan.<br /></div>' );
-                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname_1/'</script>";
+                    echo "<script>window.location='".base_url()."member_side/tambah_laporan_opname/'</script>";
                 }
             }
         }
@@ -543,9 +546,9 @@ class Report extends CI_Controller {
             );
             // print_r($data_insert1b);
             $this->Main_model->insertData('stok_opname_detail',$data_insert1b);
-            $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value['id']))->row();
-            $tambah_qty = ($databarang->stok)-$value['qty'];
-            $this->Main_model->updateData('barang', array('stok'=>$tambah_qty),array('id_barang'=>$value['id']));
+            // $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value['id']))->row();
+            // $tambah_qty = ($databarang->stok)-$value['qty'];
+            // $this->Main_model->updateData('barang', array('stok'=>$tambah_qty),array('id_barang'=>$value['id']));
         }
         $data_insert1a = array(
             'id_stok_opname' => $get_id_stok_opname['id_stok_opname']+1,
@@ -554,8 +557,8 @@ class Report extends CI_Controller {
             // 'total_harga' => $total_harga_,
             'created_by' => $this->session->userdata('id'),
             'created_at' => date('Y-m-d H:i:s'),
-            'status' => '0',
-            'keterangan' => $this->input->post('ket')
+            'status' => '0'
+            // ,'keterangan' => $this->input->post('ket')
         );
         // print_r($data_insert1a);
         $this->Main_model->insertData('stok_opname',$data_insert1a);
@@ -664,9 +667,9 @@ class Report extends CI_Controller {
             $qty += $value->qty;
             // $harga = $value->qty * $value->harga_satuan;
             // $totalharga += $harga;
-            $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value->id_barang))->row();
-            $hasil_qty = ($databarang->stok)+($value->qty);
-            $this->Main_model->updateData('barang', array('stok'=>$hasil_qty),array('id_barang'=>$value->id_barang));
+            // $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value->id_barang))->row();
+            // $hasil_qty = ($databarang->stok)+($value->qty);
+            // $this->Main_model->updateData('barang', array('stok'=>$hasil_qty),array('id_barang'=>$value->id_barang));
         }
         $this->Main_model->deleteData('stok_opname_detail', array('md5(id_stok_opname_detail)'=>$this->uri->segment(3)));
         $get_data_utama = $this->Main_model->getSelectedData('stok_opname a', 'a.*', array('a.id_stok_opname'=>$id))->row();
@@ -691,12 +694,12 @@ class Report extends CI_Controller {
     {
         $this->db->trans_start();
         $this->Main_model->deleteData('stok_opname', array('md5(id_stok_opname)'=>$this->uri->segment(3)));
-        $datadetail = $this->Main_model->getSelectedData('stok_opname_detail a', 'a.*', array('md5(a.id_stok_opname)'=>$this->uri->segment(3)))->result();
-        foreach ($datadetail as $key => $value) {
-            $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value->id_barang))->row();
-            $hasil_qty = ($databarang->stok)-($value->qty);
-            $this->Main_model->updateData('barang', array('stok'=>$hasil_qty),array('id_barang'=>$value->id_barang));
-        }
+        // $datadetail = $this->Main_model->getSelectedData('stok_opname_detail a', 'a.*', array('md5(a.id_stok_opname)'=>$this->uri->segment(3)))->result();
+        // foreach ($datadetail as $key => $value) {
+        //     $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value->id_barang))->row();
+        //     $hasil_qty = ($databarang->stok)-($value->qty);
+        //     $this->Main_model->updateData('barang', array('stok'=>$hasil_qty),array('id_barang'=>$value->id_barang));
+        // }
 		$this->Main_model->deleteData('stok_opname_detail', array('md5(id_stok_opname)'=>$this->uri->segment(3)));
         $this->Main_model->log_activity($this->session->userdata('id'),"Deleting stok opname's report","Delete stok opname's report",$this->session->userdata('location'));
         $this->db->trans_complete();

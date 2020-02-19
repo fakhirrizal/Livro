@@ -25,7 +25,7 @@
 			<!-- BEGIN EXAMPLE TABLE PORTLET-->
 			<div class="portlet light ">
 				<div class="portlet-body">
-					<div class="form-wizard">
+					<!-- <div class="form-wizard">
 						<div class="form-body">
 							<ul class="nav nav-pills nav-justified steps">
 								<li class="active">
@@ -44,9 +44,9 @@
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-body">
-						<form role="form" class="form-horizontal" action="<?=base_url('member_side/tambah_barang_opname');?>" method="post"  enctype='multipart/form-data'>
+						<form role="form" class="form-horizontal" action="<?=base_url('member_side/tambah_barang_opname');?>" method="post" enctype='multipart/form-data'>
 							<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 							<div class="form-group form-md-line-input has-danger">
 								<label class="col-md-2 control-label" for="form_control_1">Barang <span class="required"> * </span></label>
@@ -123,7 +123,7 @@
 					<div class="form-actions margin-top-10">
 						<div class="row">
 							<div class="col-md-offset-2 col-md-10">
-								<a class="btn blue" href='<?=base_url('member_side/tambah_laporan_opname_2/');?>'>Lanjut  <i class='icon-control-play'></i></a>
+								<a class="btn blue" href='<?=base_url('member_side/simpan_data_laporan_opname/');?>'>Ajukan Permintaan  <i class='icon-control-play'></i></a>
 							</div>
 						</div>
 					</div>

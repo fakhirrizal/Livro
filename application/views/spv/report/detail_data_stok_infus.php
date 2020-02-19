@@ -45,10 +45,11 @@
 									echo'';
 								}else{
 									$explode_tgl = explode(' ',$row->approval);
-									$approval = '&nbsp;&nbsp;'.$this->Main_model->convert_tanggal($explode_tgl[0]).' '.substr($explode_tgl[1],0,5).'&nbsp;&nbsp;oleh '.$row->fullname;
+									$get_verificator = $this->Main_model->getSelectedData('user_profile a', 'a.*', array('a.user_id'=>$row->verificator))->row();
+									$approval = '&nbsp;&nbsp;'.$this->Main_model->convert_tanggal($explode_tgl[0]).' '.substr($explode_tgl[1],0,5).'&nbsp;&nbsp;oleh '.$get_verificator->fullname;
 								}
 						?>
-								<div class="col-md-6">
+								<div class="col-md-10">
 									<table class="table">
 										<tbody>
                                             <tr>
@@ -208,7 +209,7 @@
 									</div>
 								</div>
 								<?php
-								}elseif($role_id=='3'){
+								}elseif($role_id=='3' OR $role_id=='4'){
 								?>
 								<div class="tabbable-line">
 									<ul class="nav nav-tabs ">

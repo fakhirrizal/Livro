@@ -8,7 +8,7 @@
 			}
 			else {
 				$.ajax({
-					url: '<?= site_url('admin/Master/ajax_function'); ?>',
+					url: '<?= site_url('spv/Master/ajax_function'); ?>',
 					type: 'POST',
                     data: {username:uname,modul:'username_check'},
 					success: function(hasil) {
@@ -25,7 +25,7 @@
 		<i class="fa fa-circle"></i>
 	</li>
 	<li>
-		<span><a href='<?= site_url('/admin_side/karyawan'); ?>'>Data Karyawan</a></span>
+		<span><a href='<?= site_url('/spv_side/karyawan'); ?>'>Data Karyawan</a></span>
 		<i class="fa fa-circle"></i>
 	</li>
 	<li>
@@ -44,7 +44,7 @@
 			<!-- BEGIN EXAMPLE TABLE PORTLET-->
 			<div class="portlet light ">
 				<div class="portlet-body">
-					<form role="form" class="form-horizontal" action="<?=base_url('admin_side/simpan_data_karyawan');?>" method="post" enctype='multipart/form-data'>
+					<form role="form" class="form-horizontal" action="<?=base_url('spv_side/simpan_data_karyawan');?>" method="post" enctype='multipart/form-data'>
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 						<div class="form-body">
 							<div class="form-group form-md-line-input has-danger">
@@ -83,8 +83,8 @@
 									<div class="input-icon">
 										<select class="form-control" name="role" required>
 											<option value=''>-- Pilih --</option>
-											<option value='2'>Head Store</option>
-											<option value='3'>Bar & Kitchen</option>
+											<option value='3'>Head Bar</option>
+											<option value='4'>Head Kitchen</option>
 										</select>
 										<div class="form-control-focus"> </div>
 										<i class="icon-pin"></i>

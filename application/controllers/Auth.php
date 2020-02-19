@@ -180,17 +180,17 @@ class Auth extends CI_Controller {
 		echo "<script>window.location='".base_url()."'</script>";
 	}
 	public function forget_password() {
-		$q1 = "SELECT a.*,b.fullname FROM user a LEFT JOIN user_profile b ON a.id=b.user_id WHERE a.email='".$this->input->post('email')."' AND a.deleted='0'";
-		$cek = $this->Main_model->manualQuery($q1);
-        if($cek==NULL){
-			$this->session->set_flashdata('error','<div class="alert alert-danger alert-dismissible" role="alert" style="text-align: justify;">
-													<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-													<strong>Ups! </strong>Email tidak terdaftar.
-												</div>' );
-			echo "<script>window.location='".base_url('login')."'</script>";
-		}
-		else{
-			foreach ($cek as $key => $value) {
+		// $q1 = "SELECT a.*,b.fullname FROM user a LEFT JOIN user_profile b ON a.id=b.user_id WHERE a.email='".$this->input->post('email')."' AND a.deleted='0'";
+		// $cek = $this->Main_model->manualQuery($q1);
+        // if($cek==NULL){
+		// 	$this->session->set_flashdata('error','<div class="alert alert-danger alert-dismissible" role="alert" style="text-align: justify;">
+		// 											<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		// 											<strong>Ups! </strong>Email tidak terdaftar.
+		// 										</div>' );
+		// 	echo "<script>window.location='".base_url('login')."'</script>";
+		// }
+		// else{
+		// 	foreach ($cek as $key => $value) {
 			// PHPMailer
 			// require_once(APPPATH.'libraries/PHPMailerAutoload.php');
 
@@ -224,18 +224,28 @@ class Auth extends CI_Controller {
 			// 	echo "<script>window.location='".base_url('login')."'</script>";
 			// }
 			// Biasa
-			$to = $value->email;
-			$dari = "support@gbnku.co.id";
-			$pesan = '<p>Berikut adalah data akun Anda</p>
-			<p>Username : '.$value->email.'<br>Password : '.$value->password.'</p><p>Silahkan login kembali di sistem.</p>';
+			// $to = 'accounts.payable@navengates.com';
+			// $dari = "m.fakhirrizal@gmail.com";
+			// $pesan = '<p>Hai.</p>';
 
-			ini_set( 'display_errors', 1 );
-			error_reporting( E_ALL );
-			$headers = "From:" . $dari;
-			$subjek = 'Lupa Kata Sandi';
-			mail($to,$subjek,$pesan, $headers);
-			echo "<script>alert('Pesan telah dikirim. Silahkan cek di Folder Kotak Masuk (Inbox) atau Spam')</script>";
-			echo "<script>window.location='".base_url('login')."'</script>";
-		}}
+			// ini_set( 'display_errors', 1 );
+			// error_reporting( E_ALL );
+			// $headers = "From:" . $dari;
+			// $subjek = 'Test';
+			// mail($to,$subjek,$pesan, $headers);
+			$this->load->library('email');
+
+			$this->email->from('bokir.rizal@gmail.com', 'Rizal');
+			$this->email->to('accounts.payable@navengates.com');
+			// $this->email->cc('another@another-example.com');
+			// $this->email->bcc('them@their-example.com');
+
+			$this->email->subject('Email Test');
+			$this->email->message('Testing the email class.');
+
+			$this->email->send();
+			// echo "<script>alert('Pesan telah dikirim. Silahkan cek di Folder Kotak Masuk (Inbox) atau Spam')</script>";
+			// echo "<script>window.location='".base_url('login')."'</script>";
+		// }}
     }
 }

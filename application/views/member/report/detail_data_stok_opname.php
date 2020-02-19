@@ -22,7 +22,7 @@
 	<div class="m-heading-1 border-yellow m-bordered" style="background-color:#FAD405;">
 		<h3>Catatan</h3>
 		<p> 1. Jika laporan telah "<b>disetujui</b>" ataupun "<b>ditolak</b>" maka data tidak dapat diubah kembali.</p>
-		<p> 2. Jika menghapus data barang maka stok di master barang akan bertambah.</p>
+		<!-- <p> 2. Jika menghapus data barang maka stok di master barang akan bertambah.</p> -->
 	</div>
 	<div class="row">
 		<div class="col-md-12">
@@ -106,13 +106,13 @@
 					<div class='row'>
 						<div class="col-md-12" >
 							<div class="tabbable-line">
-								<div class="table-toolbar">
+								<!-- <div class="table-toolbar">
 									<div class="row">
 										<div class="col-md-6">
 											<a href="<?php echo site_url('member_side/tambah_laporan_opname_1'); ?>" class="btn green uppercase">Tambah Data Laporan <i class="fa fa-plus"></i> </a>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<table class="table table-striped table-bordered" id="tbl1">
 									<thead>
 										<tr>

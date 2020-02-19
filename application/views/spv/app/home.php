@@ -4,6 +4,55 @@
 	<i class="fa fa-warning"></i> <strong>Selamat Datang</strong></a>
 </div>
 <div class="page-content-inner">
+	<div class="row widget-row">
+		<div class="col-md-6">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">Limit Stok</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-red icon-layers"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">Barang</span>
+						<?php
+						$total_barang = 0;
+						$get_data_detail_barang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.deleted'=>'0'))->result();
+						foreach ($get_data_detail_barang as $key => $value) {
+							if($value->stok>$value->limit_stok){
+								echo'';
+							}else{
+								$total_barang++;
+							}
+						}
+						?>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="<?= number_format($total_barang,0); ?>"><?= number_format($total_barang,0); ?></span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+		<div class="col-md-6">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">Pengeluaran Hari Ini</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">Rupiah</span>
+						<?php
+						$total_pengeluaran = 0;
+						$cur_date = date('Y-m-d');
+						$pengeluaran = $this->db->query("SELECT * FROM stok_infus WHERE approval LIKE '%".$cur_date."%'")->result();
+						foreach ($pengeluaran as $key => $value) {
+							$total_pengeluaran += $value->total_harga;
+						}
+						?>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="<?= number_format($total_pengeluaran,2); ?>"><?= number_format($total_pengeluaran,2); ?></span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="portlet light ">

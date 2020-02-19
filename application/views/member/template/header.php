@@ -1,9 +1,10 @@
 <?php
-if(($this->session->userdata('id'))==NULL OR ($this->session->userdata('role_id'))!='3'){
+if(($this->session->userdata('id'))==NULL){
             echo "<script>alert('Harap login terlebih dahulu')</script>";
             echo "<script>window.location='".base_url('Auth/logout')."'</script>";
         }
 else{
+	if(($this->session->userdata('role_id'))=='3' OR ($this->session->userdata('role_id'))=='4'){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,14 +65,12 @@ else{
 						<ul class="nav navbar-nav pull-right">
 							<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
 								<?php
-									// $q = "SELECT a.*,b.last_login,c.fullname,(SELECT COUNT(d.id) FROM user d WHERE d.role='radiografer' AND d.company_id=a.id AND d.deleted='0') AS jumlah_radiografer FROM company a LEFT JOIN admin_to_company b ON a.id=b.company_id LEFT JOIN user_profile c ON b.user_id=c.user_id WHERE a.deleted='0' AND b.user_id='".$this->session->userdata('id')."' AND b.deleted='0' AND c.deleted='0'";
-									// $data_notif = $this->Main_model->manualQuery($q);
 									$data_notif = 0;
 								?>
-								<a href="#" class="dropdown-toggle" title="Notifikasi">
+								<!-- <a href="#" class="dropdown-toggle" title="Notifikasi">
 									<i class="icon-bell"></i>
 									<span class="badge badge-default"><?= count($data_notif); ?></span>
-								</a>
+								</a> -->
 								<ul class="dropdown-menu">
 									<li class="external">
 										<h3>Ada
@@ -80,9 +79,6 @@ else{
 									</li>
 									<li>
 										<ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-											<?php
-											// foreach ($data_notif as $key => $value) {
-											?>
 											<li>
 												<a href="javascript:;">
 													<span class="time">just now</span>
@@ -92,7 +88,6 @@ else{
 														</span> <?= $value->fullname; ?> </span>
 												</a>
 											</li>
-											<?php // } ?>
 											<li>
 												<a href="javascript:;">
 													<span class="time">3 mins</span>
@@ -106,9 +101,9 @@ else{
 									</li>
 								</ul>
 							</li>
-							<li class="droddown dropdown-separator">
+							<!-- <li class="droddown dropdown-separator">
 								<span class="separator"></span>
-							</li>
+							</li> -->
 							<!-- BEGIN USER LOGIN DROPDOWN -->
 							<li class="dropdown dropdown-user dropdown-dark">
 								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -177,11 +172,11 @@ else{
 											<i class="icon-action-redo"></i> Stok Infus
 										</a>
 									</li>
-									<!-- <li class=" <?php if($child=='opname'){echo 'active';}else{echo '';} ?>">
+									<li class=" <?php if($child=='opname'){echo 'active';}else{echo '';} ?>">
 										<a href="<?php echo site_url('member_side/laporan_opname'); ?>" class="nav-link nav-toggle ">
 											<i class="icon-action-undo"></i> Stok Opname
 										</a>
-									</li> -->
+									</li>
 								</ul>
 							</li>
 							<li class="menu-dropdown classic-menu-dropdown <?php if($parent=='log_activity'){echo 'active';}else{echo '';} ?>">
@@ -229,4 +224,7 @@ else{
 				<div class="page-content">
 					<div class="container">
 						<!-- BEGIN PAGE BREADCRUMBS -->
-<?php } ?>
+<?php }else{
+	echo "<script>alert('Harap login terlebih dahulu')</script>";
+	echo "<script>window.location='".base_url('Auth/logout')."'</script>";
+}} ?>

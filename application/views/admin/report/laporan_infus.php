@@ -111,7 +111,7 @@
 						<h3>Catatan</h3>
 						<p> 1. Data yang masuk dalam data rekap adalah yang berstatus <b>Approved</b>.</p>
 					</div>
-					<form role="form" class="form-horizontal" action="<?=base_url('admin_side/download_rekap_infus_barang');?>" method="post"  enctype='multipart/form-data'>
+					<form role="form" class="form-horizontal" action="<?=base_url('admin_side/download_rekap_infus_barang');?>" method="post" enctype='multipart/form-data'>
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 						<div class="form-group form-md-line-input has-danger" id='pil'>
 							<div class="col-md-2">

@@ -4,11 +4,11 @@
 </style>
 <ul class="page-breadcrumb breadcrumb">
 	<li>
-		<span>Laporan</span>
+		<span>Master</span>
 		<i class="fa fa-circle"></i>
 	</li>
 	<li>
-		<span>Stok Opname</span>
+		<span>Data Karyawan</span>
 	</li>
 </ul>
 <?= $this->session->flashdata('sukses') ?>
@@ -16,7 +16,7 @@
 <div class="page-content-inner">
 	<div class="m-heading-1 border-yellow m-bordered" style="background-color:#FAD405;">
 		<h3>Catatan</h3>
-		<p> 1. Jika permintaan telah dimoderasi maka data tidak akan bisa dihapus oleh Anda.</p>
+		<p> 1. Ketika mengklik <b>Atur Ulang Sandi</b>, maka kata sandi otomatis menjadi "<b>1234</b>"</p>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
@@ -32,8 +32,8 @@
 										<i class="fa fa-trash"></i>
 									</button>
 								</div>
-									<!-- <span class="separator">|</span>
-									<a href="<?=base_url('spv_side/tambah_laporan_opname_1');?>" class="btn green uppercase">Tambah Data <i class="fa fa-plus"></i> </a> -->
+									<span class="separator">|</span>
+									<a href="<?=base_url('spv_side/tambah_data_karyawan');?>" class="btn green uppercase">Tambah Data <i class="fa fa-plus"></i> </a>
 							</div>
 						</div>
 					</div>
@@ -47,9 +47,10 @@
 									</label>
 								</th>
 								<th style="text-align: center;" width="4%"> # </th>
-								<th style="text-align: center;"> Tanggal Laporan </th>
-								<th style="text-align: center;"> Pelapor </th>
-								<th style="text-align: center;"> Jumlah Barang </th>
+								<th style="text-align: center;"> Nama </th>
+								<th style="text-align: center;"> Alamat </th>
+								<th style="text-align: center;"> Nomor HP </th>
+								<th style="text-align: center;"> Role </th>
 								<th style="text-align: center;"> Status </th>
 								<th style="text-align: center;" width="7%"> Aksi </th>
 							</tr>
@@ -62,20 +63,20 @@
 								"order": [[ 1, "asc" ]],
 								"bProcessing": true,
 								"ajax" : {
-									type:"POST",
-									url: "<?php echo site_url('spv/Report/json_stok_opname')?>",
-									cache: false
+									url:"<?= site_url('spv/Master/json_karyawan'); ?>"
 								},
 								"aoColumns": [
 											{ mData: 'checkbox', sClass: "alignCenter", "bSortable": false} ,
 											{ mData: 'number', sClass: "alignCenter" },
-											{ mData: 'tanggal_laporan', sClass: "alignCenter" },
-											{ mData: 'pelapor', sClass: "alignCenter" },
-											{ mData: 'jumlah_barang', sClass: "alignCenter" },
+											{ mData: 'nama' } ,
+											{ mData: 'alamat', sClass: "alignCenter" } ,
+											{ mData: 'no_hp', sClass: "alignCenter" },
+											{ mData: 'role', sClass: "alignCenter" },
 											{ mData: 'status', sClass: "alignCenter" },
 											{ mData: 'action' }
 										]
 							});
+
 						});
 					</script>
 					<script type="text/javascript">
@@ -90,6 +91,7 @@
 					</script>
 				</div>
 			</div>
+			<!-- END EXAMPLE TABLE PORTLET-->
 		</div>
 	</div>
 </div>

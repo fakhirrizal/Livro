@@ -9,7 +9,7 @@
 			}
 			else {
 				$.ajax({
-					url: '<?= site_url('admin/Master/ajax_function'); ?>',
+					url: '<?= site_url('spv/Master/ajax_function'); ?>',
 					type: 'POST',
                     data: {kode_barang:kode_barang,id_barang:'<?= $data_utama->id_barang; ?>',modul:'cek_kode_barang_by_edit_barang'},
 					success: function(hasil) {
@@ -26,7 +26,7 @@
 		<i class="fa fa-circle"></i>
 	</li>
 	<li>
-		<span><a href='<?= site_url('/admin_side/barang'); ?>'>Data Barang</a></span>
+		<span><a href='<?= site_url('/spv_side/barang'); ?>'>Data Barang</a></span>
 		<i class="fa fa-circle"></i>
 	</li>
 	<li>
@@ -45,7 +45,7 @@
 			<!-- BEGIN EXAMPLE TABLE PORTLET-->
 			<div class="portlet light ">
 				<div class="portlet-body">
-					<form role="form" class="form-horizontal" action="<?=base_url('admin_side/perbarui_data_barang');?>" method="post" enctype='multipart/form-data'>
+					<form role="form" class="form-horizontal" action="<?=base_url('spv_side/perbarui_data_barang');?>" method="post" enctype='multipart/form-data'>
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 						<input type="hidden" name="id_barang" value="<?= md5($data_utama->id_barang); ?>">
 						<div class="form-body">

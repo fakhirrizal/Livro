@@ -24,7 +24,7 @@
 			<div class="portlet light ">
 				<div class="portlet-body">
 					<div class="form-body">
-						<form role="form" class="form-horizontal" action="<?=base_url('member_side/perbarui_data_stok_infus');?>" method="post"  enctype='multipart/form-data'>
+						<form role="form" class="form-horizontal" action="<?=base_url('member_side/perbarui_data_stok_infus');?>" method="post" enctype='multipart/form-data'>
 							<input type="hidden" name="id" value="<?= md5($data_utama->id_stok_infus); ?>">
 							<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
 							<div class="form-group form-md-line-input has-danger">

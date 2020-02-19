@@ -52,7 +52,7 @@ class Report extends CI_Controller {
             if($value->status=='1'){
                 $isi['status'] = '<span class="label label-success"> Approved </span>&nbsp;&nbsp;'.$approval.'&nbsp;&nbsp;oleh '.$value->fullname;
 			}elseif($value->status=='9'){
-				$isi['status'] = '<span class="label label-danger"> Rejected </span>&nbsp;&nbsp;'.'&nbsp;&nbsp;oleh '.$approval.$value->fullname;
+				$isi['status'] = '<span class="label label-danger"> Rejected </span>&nbsp;&nbsp;'.$approval.'&nbsp;&nbsp;oleh '.$value->fullname;
             }else{
                 $isi['status'] = '<span class="label label-warning"> Pending </span>';
                 $href_ubah_data = 'href="'.site_url('spv_side/ubah_data_stok_infus/'.md5($value->id_stok_infus)).'"';
@@ -364,6 +364,28 @@ class Report extends CI_Controller {
             echo "<script>window.location='".base_url()."spv_side/daftar_barang_stok_infus/".$this->input->post('id')."'</script>";
         }
     }
+    public function download_rekap_infus_barang()
+    {
+        if($this->input->post('optionsRadios')=='option1'){
+            if($this->input->post('d1')==NULL){
+                $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>harap pilih tanggal.<br /></div>' );
+                echo "<script>window.location='".base_url()."admin_side/laporan_infus/'</script>";
+            }else{
+                $data['tanda'] = 'b1';
+                $data['isian'] = $this->input->post('d1');
+                $this->load->view('spv/report/rekap_infus_barang',$data);
+            }
+        }else{
+            if($this->input->post('d2')==NULL){
+                $this->session->set_flashdata('gagal','<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><strong></i>Oops! </strong>harap pilih bulan.<br /></div>' );
+                echo "<script>window.location='".base_url()."admin_side/laporan_infus/'</script>";
+            }else{
+                $data['tanda'] = 'b2';
+                $data['isian'] = $this->input->post('d2');
+                $this->load->view('spv/report/rekap_infus_barang',$data);
+            }
+        }
+    }
     public function hapus_data_stok_infus_barang()
     {
         $this->db->trans_start();
@@ -434,7 +456,7 @@ class Report extends CI_Controller {
     }
     public function json_stok_opname()
     {
-        $get_data = $this->Main_model->getSelectedData('stok_opname a', 'a.*,b.fullname', array('a.created_by'=>$this->session->userdata('id')), '', '', '', '', array(
+        $get_data = $this->Main_model->getSelectedData('stok_opname a', 'a.*,b.fullname', '', '', '', '', '', array(
             'table' => 'user_profile b',
             'on' => 'a.created_by=b.user_id',
             'pos' => 'LEFT'
@@ -456,10 +478,18 @@ class Report extends CI_Controller {
             $href_ubah_data = 'href="#"';
             $href_hapus_data = 'href="#"';
             $return_on_click = "return confirm('Anda yakin?')";
+            $approval = '';
+            if($value->approval==NULL){
+                echo'';
+            }else{
+                $explode_tgl = explode(' ',$value->approval);
+                $get_verificator = $this->Main_model->getSelectedData('user_profile a', 'a.*', array('a.user_id'=>$value->verificator))->row();
+                $approval = '&nbsp;&nbsp;'.$this->Main_model->convert_tanggal($explode_tgl[0]).' '.substr($explode_tgl[1],0,5).'&nbsp;&nbsp;oleh '.$get_verificator->fullname;
+            }
             if($value->status=='1'){
-				$isi['status'] = '<span class="label label-success"> Approved </span>';
+				$isi['status'] = '<span class="label label-success"> Approved </span>'.$approval;
 			}elseif($value->status=='9'){
-				$isi['status'] = '<span class="label label-danger"> Rejected </span>';
+				$isi['status'] = '<span class="label label-danger"> Rejected </span>'.$approval;
             }else{
                 $isi['status'] = '<span class="label label-warning"> Pending </span>';
                 $href_ubah_data = 'href="'.site_url('spv_side/ubah_data_stok_opname/'.md5($value->id_stok_opname)).'"';
@@ -474,10 +504,6 @@ class Report extends CI_Controller {
                                         <li>
                                             <a href="'.site_url('spv_side/detail_data_stok_opname/'.md5($value->id_stok_opname)).'">
                                                 <i class="icon-eye"></i> Detil Data </a>
-                                        </li>
-                                        <li>
-                                            <a '.$href_ubah_data.'>
-                                                <i class="icon-wrench"></i> Ubah Data </a>
                                         </li>
                                         <li>
                                             <a '.$href_hapus_data.'>
@@ -716,10 +742,21 @@ class Report extends CI_Controller {
     {
         $this->db->trans_start();
         $data_insert1 = array(
-            'status' => $this->input->post('stts')
+            'status' => $this->input->post('stts'),
+            'approval' => date('Y-m-d H:i:s'),
+            'verificator' => $this->session->userdata('id'),
+            'keterangan' => $this->input->post('ket')
         );
         // print_r($data_insert1);
         $this->Main_model->updateData('stok_opname',$data_insert1,array('md5(id_stok_opname)'=>$this->input->post('id')));
+        if($this->input->post('stts')=='1'){
+            $get_data_detail_barang = $this->Main_model->getSelectedData('stok_opname_detail a', 'a.*', array('md5(a.id_stok_opname)'=>$this->input->post('id')))->result();
+            foreach ($get_data_detail_barang as $key => $value) {
+                $databarang = $this->Main_model->getSelectedData('barang a', 'a.*', array('a.id_barang'=>$value->id_barang))->row();
+                $kurang_qty = ($databarang->stok)-($value->qty);
+                $this->Main_model->updateData('barang', array('stok'=>$kurang_qty),array('id_barang'=>$value->id_barang));
+            }
+        }else{echo'';}
         $this->Main_model->log_activity($this->session->userdata('id'),'Updating data',"Memperbarui status data stok opname (".$this->input->post('stts').")",$this->session->userdata('location'));
         $this->db->trans_complete();
         if($this->db->trans_status() === false){
@@ -872,7 +909,7 @@ class Report extends CI_Controller {
                 <input type="hidden" name="id" value="'.$this->input->post('id').'" readonly>
                 <div class="form-body">
                     <div class="form-group form-md-line-input has-danger">
-                        <label class="col-md-2 control-label" for="form_control_1">Pelapor </label>
+                        <label class="col-md-2 control-label" for="form_control_1">Requester </label>
                         <div class="col-md-10">
                             <div class="input-icon">
                                 <input type="text" class="form-control" value="'.$data->fullname.'" readonly>
@@ -882,7 +919,7 @@ class Report extends CI_Controller {
                         </div>
                     </div>
                     <div class="form-group form-md-line-input has-danger">
-                        <label class="col-md-2 control-label" for="form_control_1">Tanggal Lapor </label>
+                        <label class="col-md-2 control-label" for="form_control_1">Tanggal Permintaan </label>
                         <div class="col-md-10">
                             <div class="input-icon">
                                 <input type="text" class="form-control" value="'.$this->Main_model->convert_tanggal($pecah_tanggal[0]).' '.substr($pecah_tanggal[1],0,5).'" readonly>
@@ -895,7 +932,7 @@ class Report extends CI_Controller {
                         <label class="col-md-2 control-label" for="form_control_1">Keterangan </label>
                         <div class="col-md-10">
                             <div class="input-icon">
-                                <input type="text" class="form-control" value="'.$data->keterangan.'" readonly>
+                                <input type="text" class="form-control" name="ket" value="'.$data->keterangan.'">
                                 <div class="form-control-focus"> </div>
                                 <i class="icon-list"></i>
                             </div>
